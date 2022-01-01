@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElektroSaldo</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo/LogoBlanco150.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <section class="hero">
+            <h1 class="hero-message">
+                ElektroSaldo
+            </h1>
+            <p class="under-hero">Te brindamos un amplio catálogo que podrás disfrutar de forma gratuita y crear un
+                listado con tus favoritos.</p>
+            <p class="secondParagraph">Si quieres estar atento con las novedades suscríbete a nuestro Newsletter.</p>
+            <section class="form">
+                <div class="loadGame" id="anchor">
+                    <form action="" class="showForm" id="formGames" name="newsLetter">
+                        <button type="submit" value="Suscribete!" class="button sendForm"
+                            id="btnAdd">Suscribete!</button>
+                        <label for="gameConsole">Email:</label>
+                        <input type="text" name="email" id="usermail" placeholder="JohnDoe@mail.com" class="iptValue">
+                        <span class="validMsg" id="errorMsgE">*Introduce un correo válido.</span>
+                        <span class="validMsg" id="sendMsge">Suscripción exitosa.</span>
+                    </form>
+                </div>
+            </section>
+        </section>
+        <picture class="promo-art">
+            <img src="./assets/img/imgxbox/Catalogo.jpg" alt="Catálogo" class="banner">
+        </picture>
+    </header>
+    <div class="mainTitle" id="productlist">
+        <h3 id="catalogo">Listado de Juegos</h3>
+        <label for="filter" class="select">Tipo de Juego:
+            <select name="filter" class="selectUrl" id="typeGame">
+                <option class="optGenre" value="https://www.freetogame.com/api/games">Todos</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=Anime">Anime</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=battle-royale">Battle Royale</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=sports">Deportes</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=fantasy">Fantasía</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=open-world">Mundo Abierto</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=shooter">Shooter</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=fighting">Pelea</option>
+            </select>
+        </label>
+        <button id="openList" class="button openList">Favoritos</button>
+    </div>
+    <main id="mainContainer">
+
+    </main>
+    <section class="itemShop" id="cart">
+        <section class="cartItem " id="shopSection">
+            <div class="btnCloseContainer">
+                <button id="dltAll" class="button dltAllList">Eliminar todo</button>
+                <button id="closeBtn" class=" button closebtn">X</button>
+            </div>
+            <div class="ItemList" id="listHeader">
+                <h5 class="cartHeader" id="listTitle">Titulo</h5>
+                <h5 class="cartHeader" id="listPlatform">Plataforma</h5>
+                <h5 class="cartHeader" id="listGenre">Género</h5>
+                <h5 class="cartHeader" id="listAnchor">Enlace</h5>
+                <h5 class="cartHeader" id="listAdd">Agregado</h5>
+                <h5 class="cartHeader" id="listDlt">Eliminar</h5>
+            </div>
+            <div class="cartItemList" id="cartItemsList">
+
+            </div>
+        </section>
+    </section>
+    <footer>
+
+        <div>
+            <h6>Sitio desarrollado por Jean Olmedillo | 2021</h6>
+        </div>
+        <ul>
+            <li><a href="https://www.facebook.com/elektrsaldo" target="_blank">Facebook</a></li>
+            <li><a href="https://www.instagram.com/elektrosaldo/" target="_blank">Instagram</a></li>
+
+        </ul>
+    </footer>
+    <script src="./script/jquery/jquery-3.6.0.min.js "></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./script/gamesDom.js "></script>
+    <script src="./script/fav.js "></script>
+</body>
+
+</html>
