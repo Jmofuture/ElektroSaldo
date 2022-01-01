@@ -10,29 +10,21 @@ class Favorito {
 
 }
 
-
 //FUNCION PARA GUARDAR EN EL LS
 const setLs = (list, games) => {
   localStorage.setItem(list, JSON.stringify(games));
 };
 
-let favList = [];
-//2-1//FUNCION QUE RECUPERA LOS DATOS DE LS PARA IMPRIMIR LA LISTA DE FAVORITOS EN EL DOM
-//Recibimos el evento Click con el parametro game Cart
-//Sino encuentra el ID agrega un nuevo obj pasandolo por la clase Game para asignarle la fecha
-//lo enviamos al LS
-//Si en la busqueda el favorito ya existe, determinamos su posision en el Array
-//Y lanzamos un mensaje notificando
-function getList(gameCart) {
+let favList = []; //Array que guarda los elementos antes de ir al LS
+
+function getList(gameCart) { //Funcion invocada para verificar la existencia de los elemento en el LS
   let findGame = favList.find((g) => g.id === gameCart.id);
 
-  if (findGame === undefined) {
+  if (findGame === undefined) { //Sino existe crea un uevo Obj de clase Favorito y lo envia al LS
     let gameToCart = new Favorito(gameCart);
     favList.push(gameToCart);
     setLs("favsList", favList);
-
-  } else {
-
+  } else { //Si existe arroja un mensaje de error
     let position = favList.findIndex((g) => g.id === gameCart.id);
     console.log("Posicion en el Array ", position);
     Swal.fire({

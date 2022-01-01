@@ -27,14 +27,9 @@
             <p class="secondParagraph">Si quieres estar atento con las novedades suscríbete a nuestro Newsletter.</p>
             <section class="form">
                 <div class="loadGame" id="anchor">
-                    <form action="" class="showForm" id="formGames" name="newsLetter">
-                        <button type="submit" value="Suscribete!" class="button sendForm"
-                            id="btnAdd">Suscribete!</button>
-                        <label for="gameConsole">Email:</label>
-                        <input type="text" name="email" id="usermail" placeholder="JohnDoe@mail.com" class="iptValue">
-                        <span class="validMsg" id="errorMsgE">*Introduce un correo válido.</span>
-                        <span class="validMsg" id="sendMsge">Suscripción exitosa.</span>
-                    </form>
+                    <div  class="showForm" id="formGames">
+                        <button type="submit" class="button sendForm" id="sendForm">Suscribete!</button>
+                    </div>
                 </div>
             </section>
         </section>
@@ -44,18 +39,16 @@
     </header>
     <div class="mainTitle" id="productlist">
         <h3 id="catalogo">Listado de Juegos</h3>
-        <label for="filter" class="select">Tipo de Juego:
             <select name="filter" class="selectUrl" id="typeGame">
-                <option class="optGenre" value="https://www.freetogame.com/api/games">Todos</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=Anime">Anime</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=battle-royale">Battle Royale</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=sports">Deportes</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=fantasy">Fantasía</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=open-world">Mundo Abierto</option>
-                <option class="optGenre" value="https://www.freetogame.com/api/games?category=shooter">Shooter</option>
                 <option class="optGenre" value="https://www.freetogame.com/api/games?category=fighting">Pelea</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games?category=shooter">Shooter</option>
+                <option class="optGenre" value="https://www.freetogame.com/api/games">Todos</option>
             </select>
-        </label>
         <button id="openList" class="button openList">Favoritos</button>
     </div>
     <main id="mainContainer">
@@ -83,7 +76,7 @@
     <footer>
 
         <div>
-            <h6>Sitio desarrollado por Jean Olmedillo | 2021</h6>
+            <h6>Sitio desarrollado por Jean Olmedillo | <span id="datePag"></span></h6>
         </div>
         <ul>
             <li><a href="https://www.facebook.com/elektrsaldo" target="_blank">Facebook</a></li>

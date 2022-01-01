@@ -1,19 +1,19 @@
 $(document).ready(function () {
-  displayList();
-
+  displayList(); //Al cargar la pagina llamamos  ala funcion que genera las cards
   if (localStorage.getItem("favsList")) {
-    favList = JSON.parse(localStorage.getItem("favsList"));
+    favList = JSON.parse(localStorage.getItem("favsList")); //Verificamos si en el LS hay Data para dibujar las cards del listado
     printfav();
   }
 });
 
+//Funcion que lla a la API y luego recorre los elementos para dibujar las cards en el DOM
 
 function displayList() {
   const selectGenre = document.getElementById("typeGame");
   let urlList = selectGenre.addEventListener("change", (e) => {
     let option = e.target.value;
-    const defaultUrl = "https://www.freetogame.com/api/games";
-    let GETURL = option || defaultUrl;
+    let GETURL =  option;
+    console.log(GETURL)
     $.get(GETURL).done(function (result, state) {
       //Usamos el metodo GET de JQ
       if (state === "success") {
@@ -55,7 +55,7 @@ function displayList() {
           btnAddGame.textContent = "Favorito";
           cardContainer.appendChild(btnAddGame);
 
-          //FUNCION QUE ESCUCHA EL CLICK AL BOTON QUE ES EL QUE TIENEN EL ID Y CREA LAS CARDS EN LA SECCION DEL LISTADO
+          //Funcion que escucha el click de Agregar, busca cual es el elemento mediuante el ID
           document.getElementById(`${gameCard.id}`).addEventListener("click", (e) => {
             Swal.fire({
               icon: "success",
@@ -68,9 +68,8 @@ function displayList() {
               background: "rgba(99,31,235,0.8)",
               color: "#ffffff",
             });
-            //EJECUTAMOS LA FUNCION QUE VA A BUSCAR SI EL ELEMENTO EXISTE O NO DENTRO DEL ARRAY
+            //Ejecutamos la funcion que busca en el LS si existe o no (Se encuentra en el otro documento JS)
             getList(games.find((g) => g.id == `${gameCard.id}`));
-
 
             //   if (getList = undefined) {
 
@@ -100,46 +99,47 @@ btnCloseList.addEventListener("click", () => {
 });
 
 
-//FUNCION PARA VALIDAR EL FORMULARIO
-
-const form = document.getElementById('formGames');
-
-const inputs = document.querySelectorAll('#formGames input');
-
-const expresions = {
-  email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-}
-
-const inputsValue = {
-  email: false
-}
-
-const validateForm = (e) => {
-  if (expresions.email.test(e.target.value)) {
-    document.getElementById('usermail').classList.add('iptValueValid')
-    document.getElementById('usermail').classList.remove('iptValueError')
-    document.getElementById('errorMsgE').classList.remove('errorMsg')
-  } else {
-    document.getElementById('usermail').classList.remove('iptValueValid')
-    document.getElementById('usermail').classList.add('iptValueError')
-    document.getElementById('errorMsgE').classList.add('errorMsg')
-  }
-}
-
-
-
-inputs.forEach((input) => {
-  input.addEventListener('keyup', validateForm);
-  input.addEventListener('blur', validateForm)
-})
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if ('email') {
-    form.reset();
-  } else {
-    document.getElementById('errorMsgE').classList.add('errorMsg')
+//FUNCION PARA VALIDAR EL FORMULARIO Y USAR EL METODO POST
+let btnSend = document.getElementById('sendForm').addEventListener('click', async () => {
+  const { value: email } = await Swal.fire({ //SweetAlert que pide direccion email
+    title: 'Dirección de email',
+    input: 'email',
+    inputPlaceholder: 'johnDoe@email.com',
+    showCancelButton: true,
+    cancelButtonColor: 'rgb(223, 91, 15)',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'Enviar!',
+    background: "rgba(99,31,235,0.8)",
+    color: "#ffffff",
+  })
+  if (email) {
+    await Swal.fire({
+      title : `Email ingresado: ${email}`,
+      background: "rgba(99,31,235,0.8)",
+      color: "#ffffff",
+      confirmButtonColor: 'rgb(223, 91, 15)',
+    }), 
+      fetch('https://jsonplaceholder.typicode.com/posts', { //Metodo Post de JSONPlaceHolder
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'email',
+        body: `${email}`,
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
 })
+
+//Variable que da la fecha de la pagina en el footer
+
+let dateFooter = document.getElementById('datePag')
+dateFooter.textContent = new Date().getFullYear();
+ //La probe por el cambio de año
 
 //Nota importante, verificar que los elemento del HTML que van a recibir todo el contenido esten debidamente identificados con el ID!!!
