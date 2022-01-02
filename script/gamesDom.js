@@ -141,5 +141,3 @@ let btnSend = document.getElementById('sendForm').addEventListener('click', asyn
 let dateFooter = document.getElementById('datePag')
 dateFooter.textContent = new Date().getFullYear();
  //La probe por el cambio de año
-
-//Nota importante, verificar que los elemento del HTML que van a recibir todo el contenido esten debidamente identificados con el ID!!!

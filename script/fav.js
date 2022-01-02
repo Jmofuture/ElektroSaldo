@@ -7,7 +7,7 @@ class Favorito {
     this.url = games.freetogame_profile_url;
     this.date = new Date().toLocaleDateString();
   }
-
+  
 }
 
 //FUNCION PARA GUARDAR EN EL LS
@@ -24,12 +24,14 @@ function getList(gameCart) { //Funcion invocada para verificar la existencia de 
     let gameToCart = new Favorito(gameCart);
     favList.push(gameToCart);
     setLs("favsList", favList);
+    
   } else { //Si existe arroja un mensaje de error
     let position = favList.findIndex((g) => g.id === gameCart.id);
     console.log("Posicion en el Array ", position);
     Swal.fire({
       icon: 'info',
       title: "Hey!!!",
+      toast: true,
       text: "Ya es un favorito.",
       showConfirmButton: false,
       timer: 1500,
@@ -38,17 +40,32 @@ function getList(gameCart) { //Funcion invocada para verificar la existencia de 
     });
   }
 }
+//Funcion que trae el LS y lo paso a una variable global para usarla en dos funciones, la que imprime el listado y la que lo ordena
+let  getLocal = () => JSON.parse(localStorage.getItem("favsList")); 
 
-let  getLs = () => JSON.parse(localStorage.getItem("favsList"));
-
-
-
-
+console.log(getLocal())
+//Funcion para ordenar alfabeticamente los titulo haciendo click en "Titulo"
+let elementList = document.getElementById('listTitle').addEventListener('click', (e) => {
+  console.log(e.target)
+  if (e.target) {
+    sortArr = getLocal();
+    sortArr.sort((o1, o2) => {
+      if (o1.nombre < o2.nombre) {
+        return -1
+      } else if (o1.nombre > o2.nombre) {
+        return 1;
+      } else {
+        return 0
+      }
+    });
+    setLs("favsList",sortArr)
+  }
+  printfav();
+})
+//Funcion que imprime el listado de favoritos
 const printfav = () => {
 
-let lsFunc = getLs();
-  //Nos traemos el listado del LS
-  
+let favListcard = getLocal();
   //Tomamos el elemento que va a recibir los datos para el Listado
   let cartItemsList = document.getElementById("cartItemsList");
   cartItemsList.textContent = "";
@@ -56,8 +73,10 @@ let lsFunc = getLs();
   containerList.className = "cartItemList";
   containerList.id= "containerList";
   cartItemsList.appendChild(containerList);
-  //Aca se dibuja el cart
-  lsFunc.forEach((element) => {
+
+  //Aca se dibuja el listado
+
+  favListcard.map((element) => {
     let gameCart = document.createElement("div");
     gameCart.className = "ItemList";
     gameCart.id = "row" + `${element.id}`;
@@ -96,7 +115,7 @@ let lsFunc = getLs();
     btndltGame.addEventListener("click", () => {
 
       //Buscamos dentro del Array de la lista el Index del elemento
-      btndltGame = lsFunc.findIndex((g) => g.id == `${element.id}`);
+      btndltGame = favListcard.findIndex((g) => g.id == `${element.id}`);
       console.log("Que encuentra", btndltGame);
 
       //Disparamos modal que pregunta si se quiere eliminar el favorito
@@ -114,41 +133,20 @@ let lsFunc = getLs();
       }).then((result) => {
         if (result.isConfirmed) {
           //Si se confirma borramos del array el elemento
-          let dltArray = lsFunc.splice(btndltGame, 1);
+          let dltArray = favListcard.splice(btndltGame, 1);
           favList.splice(btndltGame, 1);
-          console.log("Que Borra", lsFunc);
+          console.log("Que Borra", favListcard);
           let dltRow = document.getElementById("row" + `${element.id}`).remove();
           console.log('lista de borrados', dltArray)
           //Actualizamos el LS
-          localStorage.setItem("favsList", JSON.stringify(lsFunc));
+          setLs("favsList",favListcard)
         }
       })
     });
-
-    //Funcion para ordenar segun el nombre del juego presionando la palabra titulo
-    let elementList = document.getElementById('listTitle');
-    elementList.addEventListener('click', (e) => {
-      console.log(e.target)
-      if (e.target.id = 'listTitle') {
-        getLs.sort((o1, o2) => {
-          if (o1.nombre < o2.nombre) {
-            return -1
-          } else if (o1.nombre > o2.nombre) {
-            return 1;
-          } else {
-            return 0
-          }
-        });
-        localStorage.setItem("favsList", JSON.stringify(getLs));
-      }
-      printfav();
-    })
   });
 };
 
-//Funcion para borrar todo el listado
-
-
+// Funcion para borrar todo el listado
 function deleteAllLs() {
   let btnDlt = document.getElementById('dltAll');
   btnDlt.addEventListener('click', (e) => {
@@ -171,13 +169,15 @@ function deleteAllLs() {
           container.removeChild(container.firstChild);
         };
         container.parentNode.removeChild(container);
-        
       }
     })
   })
 };
 
+    //Funcion para ordenar segun el nombre del juego presionando la palabra titulo
 
 
-getLs();
+
+
+getLocal();   
 deleteAllLs();
