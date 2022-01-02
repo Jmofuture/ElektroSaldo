@@ -7,7 +7,7 @@ class Favorito {
     this.url = games.freetogame_profile_url;
     this.date = new Date().toLocaleDateString();
   }
-  
+
 }
 
 //FUNCION PARA GUARDAR EN EL LS
@@ -24,7 +24,7 @@ function getList(gameCart) { //Funcion invocada para verificar la existencia de 
     let gameToCart = new Favorito(gameCart);
     favList.push(gameToCart);
     setLs("favsList", favList);
-    
+
   } else { //Si existe arroja un mensaje de error
     let position = favList.findIndex((g) => g.id === gameCart.id);
     console.log("Posicion en el Array ", position);
@@ -41,7 +41,7 @@ function getList(gameCart) { //Funcion invocada para verificar la existencia de 
   }
 }
 //Funcion que trae el LS y lo paso a una variable global para usarla en dos funciones, la que imprime el listado y la que lo ordena
-let  getLocal = () => JSON.parse(localStorage.getItem("favsList")); 
+let getLocal = () => JSON.parse(localStorage.getItem("favsList"));
 
 console.log(getLocal())
 //Funcion para ordenar alfabeticamente los titulo haciendo click en "Titulo"
@@ -58,20 +58,20 @@ let elementList = document.getElementById('listTitle').addEventListener('click',
         return 0
       }
     });
-    setLs("favsList",sortArr)
+    setLs("favsList", sortArr)
   }
   printfav();
 })
 //Funcion que imprime el listado de favoritos
 const printfav = () => {
 
-let favListcard = getLocal();
+  let favListcard = getLocal();
   //Tomamos el elemento que va a recibir los datos para el Listado
   let cartItemsList = document.getElementById("cartItemsList");
   cartItemsList.textContent = "";
-  let containerList= document.createElement("div");
+  let containerList = document.createElement("div");
   containerList.className = "cartItemList";
-  containerList.id= "containerList";
+  containerList.id = "containerList";
   cartItemsList.appendChild(containerList);
 
   //Aca se dibuja el listado
@@ -139,45 +139,10 @@ let favListcard = getLocal();
           let dltRow = document.getElementById("row" + `${element.id}`).remove();
           console.log('lista de borrados', dltArray)
           //Actualizamos el LS
-          setLs("favsList",favListcard)
+          setLs("favsList", favListcard)
         }
       })
     });
   });
 };
-
-// Funcion para borrar todo el listado
-function deleteAllLs() {
-  let btnDlt = document.getElementById('dltAll');
-  btnDlt.addEventListener('click', (e) => {
-
-    Swal.fire({
-      title: 'Eliminar todo?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: 'rgb(223, 91, 15)',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Si, Eliminar!',
-      background: "rgba(99,31,235,0.8)",
-      color: "#ffffff",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.clear()
-        let container = document.getElementById('containerList');
-        while (container.firstChild) {
-          container.removeChild(container.firstChild);
-        };
-        container.parentNode.removeChild(container);
-      }
-    })
-  })
-};
-
-    //Funcion para ordenar segun el nombre del juego presionando la palabra titulo
-
-
-
-
-getLocal();   
-deleteAllLs();
+getLocal();

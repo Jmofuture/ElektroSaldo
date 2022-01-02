@@ -230,13 +230,12 @@ main,
 
 .btnCloseContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
 
 .closebtn,
-.dltAllList,
 .sendForm {
   background-color: rgb(223, 91, 15);
   color: #fff;
