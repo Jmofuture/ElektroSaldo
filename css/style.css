@@ -6,6 +6,10 @@ html {
   scroll-behavior: smooth;
   font-size: var(--font-size-fluid-0);
   overflow-anchor: inherit;
+  
+  * {
+  color: #ffffff
+}
 }
 
 body {
@@ -355,13 +359,16 @@ footer ul {
 footer li {
   list-style: none;
 }
-* {
-  color: #ffffff
+
+.selectUrl{
+  color: #000000;
+  background-color: #fff;
 }
-.selectUrl,
+
 .optGenre{
   color: #000000
 }
+
 .dltRow{
   background-color: #262626
 }
