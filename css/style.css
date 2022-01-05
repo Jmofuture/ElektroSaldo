@@ -16,6 +16,7 @@ body {
   margin-right: auto;
   --op-gradient-direction: to top rigth;
   background-image: var(--gradient-2);
+  color: #ffffff;
 }
 
 .header {
