@@ -358,6 +358,7 @@ footer li {
 * {
   color: #ffffff
 }
-.selectUrl{
+.selectUrl,
+.optGenre{
   color: #000000
 }
