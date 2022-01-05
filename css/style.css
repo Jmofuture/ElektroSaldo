@@ -272,6 +272,9 @@ main,
   padding: 0.7em 0.4em;
 }
 
+#listTitle:hover{
+ animation: var(--animation-pulse);
+}
 .mainTitleCart {
   display: flex;
   justify-content: space-evenly;

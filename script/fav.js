@@ -6,9 +6,8 @@ class Favorito {
     this.id = games.id;
     this.url = games.freetogame_profile_url;
     this.date = new Date().toLocaleDateString();
-  }
-
-}
+  };
+};
 
 //FUNCION PARA GUARDAR EN EL LS
 const setLs = (list, games) => {

@@ -99,7 +99,6 @@ function displayList(url1 ,url2) {
           });
           //Ejecutamos la funcion que busca en el LS si existe o no (Se encuentra en el otro documento JS)
           getList(games.find((g) => g.id == `${gameCard.id}`));
-
           printfav(e);
         });
       });
