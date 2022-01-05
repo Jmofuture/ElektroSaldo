@@ -43,7 +43,6 @@ function getList(gameCart) { //Funcion invocada para verificar la existencia de 
 //Funcion que trae el LS y lo paso a una variable global para usarla en dos funciones, la que imprime el listado y la que lo ordena
 let getLocal = () => JSON.parse(localStorage.getItem("favsList"));
 
-console.log(getLocal())
 //Funcion para ordenar alfabeticamente los titulo haciendo click en "Titulo"
 let elementList = document.getElementById('listTitle').addEventListener('click', (e) => {
   console.log(e.target)
@@ -76,7 +75,7 @@ const printfav = () => {
 
   //Aca se dibuja el listado
 
-  favListcard.map((element) => {
+  favListcard.forEach((element) => {
     let gameCart = document.createElement("div");
     gameCart.className = "ItemList";
     gameCart.id = "row" + `${element.id}`;
@@ -145,4 +144,3 @@ const printfav = () => {
     });
   });
 };
-getLocal();
